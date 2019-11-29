@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-
+#
 # Copyright (c) 2002-2009 Gentoo Foundation
 # Copyright (c) 2019, MAD Hacking
-
+#
 # Distributed under the terms of the GNU General Public License v2 or later
 
 from __future__ import print_function
