@@ -1,5 +1,5 @@
-# Copyright(c) 2009, Gentoo Foundation
-# Copyright(c) 2019, MAD Hacking
+# Copyright (c) 2009, Gentoo Foundation
+# Copyright (c) 2019, MAD Hacking
 #
 # Licensed under the GNU General Public License, v2
 
