@@ -46,7 +46,8 @@ __authors__ = (
 
 NAME_MAP = {
     'b': 'bestkeywords',
-    'd': 'dependencies'
+    'd': 'dependencies',
+    'm': 'maskedkeywords'
 }
 
 # =========
@@ -76,6 +77,7 @@ def print_help(with_description=True):
     print(format_options((
         (" (b)estkeywords", "display the best keywords for a given package"),
         (" (d)ependencies", "display the direct dependencies for a given package"),
+        (" (m)askedkeywords", "display keywords for a given package converting to masked as unstable"),
     )))
 
 
