@@ -14,7 +14,7 @@ from getopt import gnu_getopt, GetoptError
 
 import gentoolkit.pprinter as pp
 from gentoolkit import errors
-from gentoolkit.equery import format_options, mod_usage
+from gentoolkit.equery import format_options, mod_usage, CONFIG
 from gentoolkit.query import Query
 
 # =======
@@ -95,6 +95,10 @@ def main(input_args):
 
     matches.sort()
     matches.reverse()
+    
+    if CONFIG['verbose']:
+        print(matches[0].ebuild_path())
+        print()
     
     ebkw = matches[0].environment('KEYWORDS')
     uskw = []
