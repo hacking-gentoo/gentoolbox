@@ -244,6 +244,10 @@ def main(input_args):
     matches.sort()
     matches.reverse()
     
+    if CONFIG['verbose']:
+        print(matches[0].ebuild_path())
+        print()
+    
     pkgdeps = matches[0].deps
     deps = pkgdeps.get_all_depends(raw=True)
     deps = paren_reduce(deps)
