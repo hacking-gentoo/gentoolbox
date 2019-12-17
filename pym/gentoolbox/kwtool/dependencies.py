@@ -21,14 +21,6 @@ from gentoolkit.query import Query
 # Globals
 # =======
 
-QUERY_OPTS = {
-    "in_installed": True,
-    "in_porttree": True,
-    "in_overlay": True,
-    "include_masked": True,
-    "show_progress": False
-}
-
 # =========
 # Functions
 # =========
@@ -53,7 +45,7 @@ def print_help(with_description=True):
 
 
 def parse_module_options(module_opts):
-    """Parse module options and update QUERY_OPTS"""
+    """Parse module options and update"""
 
     opts = (x[0] for x in module_opts)
     for opt in opts:
@@ -88,7 +80,7 @@ def main(input_args):
 
     query = Query(queries[0])
 
-    matches = query.smart_find(**QUERY_OPTS)
+    matches = query.find(include_masked=True, in_installed=False)
 
     if not matches:
         raise errors.GentoolkitNoMatches(query)
