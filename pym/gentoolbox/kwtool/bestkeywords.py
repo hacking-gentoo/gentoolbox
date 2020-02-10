@@ -85,7 +85,7 @@ def worst_keyword(kw1, kw2):
 
 
 def make_stable(arch):
-    return arch[1:] if arch[0] == '~' else arch
+    return arch[1:] if (arch[0] == '~' or arch[0] == '-') else arch
 
 
 def parse_atom(tok, indent=0):
