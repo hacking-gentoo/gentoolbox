@@ -40,5 +40,5 @@ python_install_all() {
 }
 
 python_test() {
-	PORTDIR_OVERLAY="$(realpath tests/overlay)" "${EPYTHON}" -m unittest discover -v
+	"${EPYTHON}" -m unittest discover -v || die "Tests failed"
 }
