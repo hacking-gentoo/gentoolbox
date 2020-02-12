@@ -22,7 +22,7 @@ fi
 SLOT="0"
 IUSE=""
 
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~riscv s390 ~sh sparc x86"
+KEYWORDS=""
 
 RDEPEND="app-portage/gentoolkit[${PYTHON_USEDEP}]"
 
@@ -35,4 +35,8 @@ python_prepare_all() {
 
 python_install_all() {
 	distutils-r1_python_install_all
+}
+
+python_test() {
+	PORTDIR_OVERLAY="$(realpath tests/overlay)" "${EPYTHON}" -m unittest discover -v
 }

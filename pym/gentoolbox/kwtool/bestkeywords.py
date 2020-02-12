@@ -88,6 +88,32 @@ def make_stable(arch):
     return arch[1:] if (arch[0] == '~' or arch[0] == '-') else arch
 
 
+def combibe_kwdicts(kwdict, pkwdict, combine=False):
+    if combine:
+        # Loop through all the arch keywords for this package. If they are not in the combined
+        # keywords then add this one. If they are already in the combined keywords then replace
+        # it with this one if it is better.
+        for (k, v) in pkwdict.items():
+            if kwdict.get(k) == None:
+                kwdict[k] = v
+            else:
+                kwdict[k] = best_keyword(kwdict[k], v)
+    else:
+        # Loop through all combined keywords. If this package has no corresponding keyword then
+        # remove it from the combined list. If it does have a corresponding keyword then replace
+        # the combined keyword with whichever is worst. We have to defer deleting the dictionary
+        # entry as you can't delete from a dictionary whilst iterating on it.
+        tbd = []
+        for (k, v) in kwdict.items():
+            if pkwdict.get(k) == None:
+                tbd.append(k)
+            else:
+                kwdict[k] = worst_keyword(pkwdict[k], v)
+        for k in tbd:
+            if kwdict.get(k) is not None:
+                del kwdict[k]
+
+
 def parse_atom(tok, indent=0):
     """Parse dependency atom"""
 
@@ -168,34 +194,9 @@ def parse_list(tok, combine=False, indent=0):
         if kwdict is None:
             kwdict = pkwdict
             continue
-        
-        # Presumably if we get here it is not the first time round the loop so we need to
-        # either combine or subtract this package's keywords from the keywords collected 
-        # so far.
-        if combine:
-            # Loop through all the arch keywords for this package. If they are not in the combined
-            # keywords then add this one. If they are already in the combined keywords then replace
-            # it with this one if it is better.
-            for (k, v) in pkwdict.items():
-                if kwdict.get(k) == None:
-                    kwdict[k] = v
-                else:
-                    kwdict[k] = best_keyword(kwdict[k], v)
-        else:
-            # Loop through all combined keywords. If this package has no corresponding keyword then
-            # remove it from the combined list. If it does have a corresponding keyword then replace
-            # the combined keyword with whichever is worst. We have to defer deleting the dictionary
-            # entry as you can't delete from a dictionary whilst iterating on it.
-            tbd = []
-            for (k, v) in kwdict.items():
-                if pkwdict.get(k) == None:
-                    tbd.append(k)
-                else:
-                    kwdict[k] = worst_keyword(kwdict[k], v)
-            for k in tbd:
-                if kwdict.get(k) is not None:
-                    del kwdict[k]
-        
+
+        combibe_kwdicts(kwdict, pkwdict, combine)
+
     indent -= 2
 
     if CONFIG['verbose']:
