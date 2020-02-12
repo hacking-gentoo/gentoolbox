@@ -39,7 +39,7 @@ bash_scripts = [(os.path.join(cwd, path), 'VERSION=') for path in (
 
 # Python files that need `__version__ = ""` subbed, relative to this dir:
 python_scripts = [(os.path.join(cwd, path), '__version__ = ') for path in (
-	'pym/gentoolbox/kwtool/__init__.py'
+	'pym/gentoolbox/kwtool/__init__.py',
 )]
 
 manpages = [(os.path.join(cwd, path[0]), path[1]) for path in (
