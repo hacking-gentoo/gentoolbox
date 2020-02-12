@@ -26,6 +26,8 @@ KEYWORDS=""
 
 RDEPEND="app-portage/gentoolkit[${PYTHON_USEDEP}]"
 
+DISTUTILS_USE_SETUPTOOLS=no
+
 python_prepare_all() {
 	python_setup
 	echo VERSION="${PVR}" "${PYTHON}" setup.py set_version
